@@ -17,7 +17,8 @@ const Login = () => {
       ...prevAuthData,
       [name]: value,
     }));
-    localStorage.setItem("data", authData);
+    localStorage.setItem("email", email);
+    localStorage.setItem("password", password);
     setIsChanged(true);
   };
   const handleSubmit = (e) => {
@@ -28,6 +29,7 @@ const Login = () => {
       storedEmail === authData.email &&
       storedPassword === authData.password
     ) {
+      localStorage.setItem("isAuthenticated", "authenticated");
       navigator("/users");
     } else {
       navigator("/register");
@@ -63,12 +65,7 @@ const Login = () => {
       <Form.Group className="mb-3" controlId="formBasicCheckbox">
         <Form.Check type="checkbox" label="Check me out" />
       </Form.Group>
-      <Button
-        variant="primary"
-        type="submit"
-        disabled={isChanged ? false : true}
-        onClick={handleSubmit}
-      >
+      <Button variant="primary" type="submit" onClick={handleSubmit}>
         Submit
       </Button>
     </Form>
