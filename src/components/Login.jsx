@@ -5,17 +5,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import NavBar from "./NavBar.jsx";
 
-const data = { email: "user1@example.com", password: "admin@123" };
-
 const Login = () => {
   const navigator = useNavigate();
   const [authData, setAuthData] = useState({ email: "", password: "" });
   const [isChanged, setIsChanged] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const handleLogOut = () => {
-    localStorage.removeItem("isAuthenticated");
-    navigator("/logout");
-  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -23,8 +17,6 @@ const Login = () => {
       ...prevAuthData,
       [name]: value,
     }));
-    // localStorage.setItem("email", authData.email);
-    // localStorage.setItem("password", authData.password);
     setIsChanged(true);
   };
   const handleSubmit = (e) => {
